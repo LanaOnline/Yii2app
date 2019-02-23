@@ -12,5 +12,11 @@ use yii\web\Controller;
 
 class BaseController extends Controller
 {
+    public function afterAction($action, $result) //redefying method
+    {
+        $session = \Yii::$app->session;
+        $session->set('lastPage', \Yii::$app->request->absoluteUrl);//remember last visited page
 
+        return parent::afterAction($action, $result);
+    }
 }
