@@ -19,9 +19,13 @@ use yii\bootstrap\ActiveForm;
             ]
         ]); ?>
         <?=$form->field($activity, 'title'); ?>
-        <?=$form->field($activity, 'body')->textarea(); ?>
+        <?=$form->field($activity, 'description')->textarea(); ?>
+        <?=$form->field($activity, 'email'); ?>
+        <?=$form->field($activity, 'startDate'); ?>
         <?=$form->field($activity, 'is_blocked')->checkbox(); ?>
         <?=$form->field($activity, 'recurring')->checkbox(); ?>
+        <?=$form->field($activity, 'image')->fileInput(); ?>
+
 
         <div class="form-group">
             <button type="submit" class="btn btn-default">Отправить</button>
