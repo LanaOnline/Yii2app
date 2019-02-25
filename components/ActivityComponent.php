@@ -9,6 +9,7 @@
 namespace app\components;
 
 
+use app\models\Activity;
 use yii\base\Component;
 
 class ActivityComponent extends Component
@@ -23,7 +24,8 @@ class ActivityComponent extends Component
     {
         parent::init();
 
-        if (empty($this->activity_class)) {
+        if (empty($this->activity_class))
+        {
             throw new \Exception('Need attribute activity_class');
         }
     }
@@ -31,20 +33,43 @@ class ActivityComponent extends Component
     /**
      * @return Activity
      */
-    public function getModel($params = null) {
+    public function getModel($params = null)
+    {
         /**
          * @var Activity $model
          */
         $model = new $this->activity_class;
 
-        if ($params && is_array($params)) {
+        if ($params && is_array($params))
+        {
 
             $model->load($params);
         }
         return $model;
     }
-    public function createActivity($model) {
 
-        return $model->validate();
+    /**
+     * @param $model Activity
+     * @return bool
+     */
+    public function createActivity($model)
+    {
+        if ($model->validate())
+        {
+            $path = $this->getPathSaveFile();
+
+            foreach ($model->imageFiles as $file) {
+                $file->saveAs($path . $file->baseName . '.' . $file->extension);
+            }
+
+            return true;
+        } else {
+            return false;
+        }
+
+    }
+
+    public function getPathSaveFile() {
+        return \Yii::getAlias('@app/web/images/');
     }
 }

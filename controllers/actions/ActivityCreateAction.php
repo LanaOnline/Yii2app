@@ -10,8 +10,8 @@ namespace app\controllers\actions;
 
 
 use app\components\ActivityComponent;
-use app\models\Activity;
 use yii\base\Action;
+use yii\web\UploadedFile;
 
 class ActivityCreateAction extends Action
 {
@@ -20,17 +20,19 @@ class ActivityCreateAction extends Action
         /**
          * @var ActivityComponent $comp
          */
-        $comp=\Yii::createObject([
-            'class'=>ActivityComponent::class,
-            'activity_class' => Activity::class
-        ]);
+        $comp = \Yii::$app->activity;
+
         if (\Yii::$app->request->isPost) {
             $activity = $comp->getModel(\Yii::$app->request->post());
-            $comp->createActivity($activity);
+            $activity->imageFiles = UploadedFile::getInstances($activity, 'imageFiles');
+
+            if ($comp->createActivity($activity)) {
+                return $this->controller->render('create-confirm', ['activity' => $activity]);
+            }
         } else {
             $activity = $comp->getModel();
         }
+        return $this->controller->render('create',['activity' => $activity]);
 
-        return $this->controller->render('create',['activity'=>$activity]);
     }
 }
