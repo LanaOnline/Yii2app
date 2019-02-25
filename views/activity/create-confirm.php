@@ -18,7 +18,7 @@ use yii\helpers\Html;
         <li><label>Email</label>: <?= Html::encode($activity->email) ?></li>
         <li><label>Блокирующая</label>: <?= Html::encode($activity->is_blocked?'Да':'Нет') ?></li>
         <li><label>Повторяющаяся</label>: <?= Html::encode($activity->recurring?'Да':'Нет') ?></li>
-        <li><?=HTML::img('/images/'.$activity->image, [])?>"/></li>
+        <li>Пользователь загрузил изображений: <?= count($activity->imageFiles) ?> .</li>
     </ul>
     <?= Html::a('Создать новую активность', ['/activity/create'], ['class' => 'btn btn-primary']); ?>
 </div>

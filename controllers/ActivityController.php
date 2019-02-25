@@ -23,6 +23,4 @@ class ActivityController extends BaseController
             'create'=>['class'=>ActivityCreateAction::class]
         ];
     }
-
-
 }

@@ -65,14 +65,12 @@ class Activity extends Model
      */
     public $email;
     /**
-     * @var UploadedFile
+     * @var UploadedFile[]
      */
-    public $image;
+    public $imageFiles;
 
     public function beforeValidate()
     {
-        $this->loadFile();
-
         //convert user Date format to php format before validation
         if(!empty($this->startDate)) {
             $this->startDate = \DateTime::createFromFormat('d.m.Y', $this->startDate);
@@ -81,17 +79,6 @@ class Activity extends Model
             }
         }
         return parent::beforeValidate();
-    }
-
-    public function loadFile()
-    {
-        /**
-         * @var UploadedFile
-         * image
-         */
-        $this->image = UploadedFile::getInstance($this, 'image');
-        var_dump('file uploaded');
-
     }
 
     public function rules()
@@ -105,7 +92,7 @@ class Activity extends Model
             ['is_blocked', 'boolean'],
             ['recurring', 'boolean'],
             ['email', 'email'],
-            ['image', 'file', 'extensions' => ['jpg', 'png']]
+            [['imageFiles'], 'file', 'extensions' => ['jpg', 'png'], 'maxFiles' => 3]
         ];
     }
 
@@ -119,7 +106,7 @@ class Activity extends Model
             'description' => 'Описание активности',
             'is_blocked' => 'Блокирующая (блокирует все другие события в этот день)',
             'recurring' => 'Повторяющаяся',
-            'image' => 'Загрузить изображение'
+            'imageFiles' => 'Загрузить изображения'
         ];
     }
 }

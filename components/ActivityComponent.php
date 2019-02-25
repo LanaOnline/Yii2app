@@ -50,23 +50,23 @@ class ActivityComponent extends Component
 
     /**
      * @param $model Activity
+     * @return bool
      */
     public function createActivity($model)
     {
         if ($model->validate())
         {
             $path = $this->getPathSaveFile();
-            $name = mt_rand(0,9999).time().'.'.$model->image->getExtension();
 
-            if (!$model->image->saveAs($path.$name))
-            {
-                $model->addError('image', 'Файл не удалось переместить');
-                return false;
+            foreach ($model->imageFiles as $file) {
+                $file->saveAs($path . $file->baseName . '.' . $file->extension);
             }
-            $model->image = $name;
-            //add code to save file info to db
+
             return true;
+        } else {
+            return false;
         }
+
     }
 
     public function getPathSaveFile() {
