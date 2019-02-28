@@ -21,7 +21,8 @@ use yii\bootstrap\ActiveForm;
         <?=$form->field($activity, 'title'); ?>
         <?=$form->field($activity, 'description')->textarea(); ?>
         <?=$form->field($activity, 'email'); ?>
-        <?=$form->field($activity, 'startDate'); ?>
+        <?=$form->field($activity, 'startDate')->input('date'); ?>
+        <?=$form->field($activity, 'endDate')->input('date'); ?>
         <?=$form->field($activity, 'is_blocked')->checkbox(); ?>
         <?=$form->field($activity, 'recurring')->checkbox(); ?>
         <?=$form->field($activity, 'imageFiles[]')->fileInput(['multiple' => true, 'accept' => 'image/*']); ?>
