@@ -15,7 +15,6 @@ use yii\helpers\Html;
     <ul>
         <li><label>Название</label>: <?= Html::encode($activity->title) ?></li>
         <li><label>Описание</label>: <?= Html::encode($activity->description) ?></li>
-        <li><label>Email</label>: <?= Html::encode($activity->email) ?></li>
         <li><label>Блокирующая</label>: <?= Html::encode($activity->is_blocked?'Да':'Нет') ?></li>
         <li><label>Повторяющаяся</label>: <?= Html::encode($activity->recurring?'Да':'Нет') ?></li>
         <li>Пользователь загрузил изображений: <?= count($activity->imageFiles) ?> .</li>

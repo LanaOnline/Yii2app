@@ -20,7 +20,6 @@ use yii\bootstrap\ActiveForm;
         ]); ?>
         <?=$form->field($activity, 'title'); ?>
         <?=$form->field($activity, 'description')->textarea(); ?>
-        <?=$form->field($activity, 'email'); ?>
         <?=$form->field($activity, 'startDate')->input('date'); ?>
         <?=$form->field($activity, 'endDate')->input('date'); ?>
         <?=$form->field($activity, 'is_blocked')->checkbox(); ?>

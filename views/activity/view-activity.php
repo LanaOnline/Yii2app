@@ -16,7 +16,6 @@ use yii\helpers\Html;
         <ul class="list-group">
             <li class="list-group-item">Название: </li>
             <li class="list-group-item">Описание: </li>
-            <li class="list-group-item">Email: </li>
             <li class="list-group-item">Блокирующая: </li>
             <li class="list-group-item">Повторяющаяся: </li>
             <li class="list-group-item">Загруженные изображения: .</li>

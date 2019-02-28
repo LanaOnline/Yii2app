@@ -37,12 +37,6 @@ class Activity extends Model
      */
     public $endDate;
     /**
-     * Author id
-     *
-     * @var int
-     */
-    public $idAuthor;
-    /**
      * Activity description
      *
      * @var string
@@ -60,10 +54,6 @@ class Activity extends Model
      * @var bool
      */
     public $recurring = false;
-    /**
-     * @var string
-     */
-    public $email;
     /**
      * @var UploadedFile[]
      */
@@ -93,7 +83,6 @@ class Activity extends Model
             ['endDate', 'compare', 'compareAttribute' => 'startDate', 'operator' => '>=', 'message' => 'Дата окончания не может предшествовать дате начала'],
             ['is_blocked', 'boolean'],
             ['recurring', 'boolean'],
-            ['email', 'email'],
             [['imageFiles'], 'file', 'extensions' => ['jpg', 'png'], 'maxFiles' => 3]
         ];
     }
@@ -104,7 +93,6 @@ class Activity extends Model
             'title' => 'Наименование активности',
             'startDate' => 'Дата начала',
             'endDate' => 'Дата окончания',
-            'idAuthor' => 'ID автора',
             'description' => 'Описание активности',
             'is_blocked' => 'Блокирующая (блокирует все другие события в этот день)',
             'recurring' => 'Повторяющаяся',
