@@ -31,6 +31,7 @@ $config = [
         'cache' => [
             'class' => 'yii\caching\FileCache',
         ],
+        'dao' => ['class' => \app\components\DaoComponent::class],
         'user' => [
             'identityClass' => 'app\models\User',
             'enableAutoLogin' => true,
