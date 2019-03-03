@@ -28,6 +28,7 @@ $config = [
             'class' => \app\components\ActivityComponent::class,
             'activity_class' => '\app\models\Activity'
         ],
+        'auth' => \app\components\UsersAuthComponent::class,
         'cache' => [
             'class' => 'yii\caching\FileCache',
         ],
