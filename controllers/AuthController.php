@@ -14,6 +14,17 @@ use yii\web\Controller;
 
 class AuthController extends Controller
 {
+    public function actionSignIn() {
+        /**
+         * @var UsersAuthComponent $comp
+         */
+        $comp = \Yii::$app->auth;
+
+        $model = $comp->getModel(\Yii::$app->request->post());
+
+        return $this->render('sign-in',['model' => $model]);
+    }
+
     public function actionRegistration() {
         /**
          * @var UsersAuthComponent $comp
