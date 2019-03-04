@@ -9,10 +9,19 @@
 namespace app\base;
 
 use yii\web\Controller;
+use yii\web\HttpException;
 
 class BaseController extends Controller
 {
-    public function afterAction($action, $result) //redefying method
+    public function beforeAction($action)
+    {
+        if(\Yii::$app->user->isGuest){
+            throw new HttpException(401,'Нет доступа');//todo: implement redirect
+        }
+        return parent::beforeAction($action);
+    }
+
+    public function afterAction($action, $result) //redefining method
     {
         $session = \Yii::$app->session;
         $session->set('lastPage', \Yii::$app->request->absoluteUrl);//remember last visited page

@@ -25,6 +25,7 @@ class Users extends UsersBase implements IdentityInterface
 
     public function rules()
     {
+        //$this->updateAttributes(['email']);
         return array_merge([
             ['password','string','min' => 4],//add autonomous rule for password check with RegEx
             ['password_match','compare', 'compareAttribute' => 'password', 'message' => 'Пароли не совпадают'],

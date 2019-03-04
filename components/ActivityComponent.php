@@ -49,6 +49,14 @@ class ActivityComponent extends Component
     }
 
     /**
+     * @param $id
+     * @return Activity|array|null|\yii\db\ActiveRecord
+     */
+    public function getActivity($id) {
+        return $this->getModel()::find()->andWhere(['id' => $id])->one();
+    }
+
+    /**
      * @param $model Activity
      * @return bool
      */

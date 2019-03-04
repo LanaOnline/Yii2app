@@ -14,11 +14,13 @@ use yii\helpers\Html;
         <h1>Просмотр активности</h1>
 
         <ul class="list-group">
-            <li class="list-group-item">Название: </li>
-            <li class="list-group-item">Описание: </li>
-            <li class="list-group-item">Блокирующая: </li>
-            <li class="list-group-item">Повторяющаяся: </li>
-            <li class="list-group-item">Загруженные изображения: .</li>
+            <li><label>Название</label>: <?= Html::encode($activity->title) ?></li>
+            <li><label>Описание</label>: <?= Html::encode($activity->description) ?></li>
+            <li><label>Дата начала</label>: <?= Html::encode($activity->startDate) ?></li>
+            <li><label>Дата окончания</label>: <?= Html::encode($activity->endDate) ?></li>
+            <li><label>Блокирующая</label>: <?= Html::encode($activity->is_blocked?'Да':'Нет') ?></li>
+            <li><label>Повторяющаяся</label>: <?= Html::encode($activity->recurring?'Да':'Нет') ?></li>
+            <li>Изображения:</li>
         </ul>
         <?= Html::a('Редактировать', ['/activity/edit'], ['class' => 'btn btn-default']); ?>
         <?= Html::a('Вернуться в календарь', ['/activity/calendar'], ['class' => 'btn btn-default']); ?>
