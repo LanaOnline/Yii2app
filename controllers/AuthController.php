@@ -22,6 +22,12 @@ class AuthController extends Controller
 
         $model = $comp->getModel(\Yii::$app->request->post());
 
+        if(\Yii::$app->request->isPost) {
+            if ($comp->authorizeUser($model)) {
+                return $this->redirect(['/activity/calendar']);
+            }
+        }
+
         return $this->render('sign-in',['model' => $model]);
     }
 

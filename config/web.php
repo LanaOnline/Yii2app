@@ -34,7 +34,7 @@ $config = [
         ],
         'dao' => ['class' => \app\components\DaoComponent::class],
         'user' => [
-            'identityClass' => 'app\models\User',
+            'identityClass' => 'app\models\Users',
             'enableAutoLogin' => true,
         ],
         'errorHandler' => [

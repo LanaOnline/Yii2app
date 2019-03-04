@@ -25,6 +25,34 @@ class UsersAuthComponent extends Component
         return $model;
     }
 
+    /**
+     * @param $model Users
+     * @return bool
+     */
+    public function authorizeUser(&$model):bool {
+        $user = $this->getUserByEmail($model->email);
+
+        if(!$user) {
+            $model->addError('email', 'Пользователь не существует');
+            return false;
+        }
+
+        if(!$this->validatePassword($model->password, $user->password_hash)) {
+            $model->addError('password', 'Пароль неверный');
+            return false;
+        }
+        $user->username = $user->email;//username is required by Yii
+
+        return \Yii::$app->user->login($user);
+    }
+
+    public function validatePassword($pass, $hash) {//add this func to rules in auth scenario
+        return \Yii::$app->security->validatePassword($pass, $hash);
+    }
+
+    public function getUserByEmail($email) {
+        return $this->getModel()::find()->andWhere(['email' => $email])->one();
+    }
     /**.
      * @param $model Users
      * @return bool
