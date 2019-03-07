@@ -36,6 +36,7 @@ class ActivityCreateAction extends Action
             $activity->imageFiles = UploadedFile::getInstances($activity, 'imageFiles');
 
             if ($comp->createActivity($activity)) {
+//                return $this->controller->redirect(['/activity/view', 'id' => $activity->id]); todo: get id
                 return $this->controller->render('create-confirm', ['activity' => $activity]);
             }
         } else {
