@@ -20,6 +20,10 @@ $config = [
         ],
     ],
     'components' => [
+        'formatter'=>[
+            'class'=>'\yii\i18n\Formatter',
+            'dateFormat' => 'php:d.m.Y'
+        ],
         'rbac'=>\app\components\RbacComponent::class,
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation

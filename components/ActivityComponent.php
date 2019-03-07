@@ -10,6 +10,7 @@ namespace app\components;
 
 
 use app\models\Activity;
+use app\models\ActivitySearch;
 use yii\base\Component;
 
 class ActivityComponent extends Component
@@ -79,5 +80,14 @@ class ActivityComponent extends Component
 
     public function getPathSaveFile() {
         return \Yii::getAlias('@app/web/images/');
+    }
+
+    /**
+     * @param $params
+     * @return \yii\data\ActiveDataProvider
+     */
+    public function getSearchProvider($params){
+        $model=new ActivitySearch();
+        return $model->getDataProvider();
     }
 }
