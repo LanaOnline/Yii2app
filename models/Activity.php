@@ -8,7 +8,6 @@
 
 namespace app\models;
 
-use yii\base\Model;
 use yii\web\UploadedFile;
 
 /**
@@ -16,54 +15,8 @@ use yii\web\UploadedFile;
  *
  * Describes a calendar event entity
  */
-class Activity extends Model
+class Activity extends ActivityBase
 {
-    /**
-     * Activity name
-     *
-     * @var string
-     */
-    public $title;
-    /**
-     * Activity start date
-     *
-     * @var int
-     */
-    public $startDate;
-    /**
-     * Activity end date
-     *
-     * @var int
-     */
-    public $endDate;
-    /**
-     * Author id
-     *
-     * @var int
-     */
-    public $idAuthor;
-    /**
-     * Activity description
-     *
-     * @var string
-     */
-    public $description;
-    /**
-     * Activity state
-     *
-     * @var boolean
-     */
-    public $is_blocked = false;
-    /**
-     * Is activity recurring
-     *
-     * @var bool
-     */
-    public $recurring = false;
-    /**
-     * @var string
-     */
-    public $email;
     /**
      * @var UploadedFile[]
      */
@@ -71,29 +24,25 @@ class Activity extends Model
 
     public function beforeValidate()
     {
-        //convert user Date format to php format before validation
-        if(!empty($this->startDate)) {
-            $this->startDate = \DateTime::createFromFormat('d.m.Y', $this->startDate);
-            if($this->startDate) {
-                $this->startDate = $this->startDate->format('Y-m-d');
-            }
+        // fill empty endDate before validation
+        if(empty($this->endDate)) {
+            $this->endDate = $this->startDate;
         }
         return parent::beforeValidate();
     }
 
     public function rules()
     {
-        return [
-            ['title','string','max' => 150, 'min' => 2],
-            ['title', 'trim'],
-            ['description','string'],
-            [['title', 'startDate'], 'required'],
-            ['startDate', 'date','format' => 'php:Y-m-d','message' => 'Формат даты должен быть dd.mm.yyyy'],
-            ['is_blocked', 'boolean'],
-            ['recurring', 'boolean'],
-            ['email', 'email'],
+        return array_merge([
+ //           ['endDate', ['required' => false]], todo: figure out how to override parent 'required' rule
+            [['title'],'string', 'min' => 2],
+            [['title'], 'trim'],
+            [['startDate', 'endDate'], 'default', 'value' => date('Y-m-d')],
+            ['startDate', 'compare', 'compareValue' => date('Y-m-d'), 'operator' => '>=', 'message' => 'Дата начала не может предшестовать сегодняшнему дню'],
+            ['endDate', 'compare', 'compareAttribute' => 'startDate', 'operator' => '>=', 'message' => 'Дата окончания не может предшествовать дате начала'],
+            [['is_blocked', 'recurring'], 'boolean'],
             [['imageFiles'], 'file', 'extensions' => ['jpg', 'png'], 'maxFiles' => 3]
-        ];
+        ], parent::rules());
     }
 
     public function attributeLabels()
@@ -102,7 +51,6 @@ class Activity extends Model
             'title' => 'Наименование активности',
             'startDate' => 'Дата начала',
             'endDate' => 'Дата окончания',
-            'idAuthor' => 'ID автора',
             'description' => 'Описание активности',
             'is_blocked' => 'Блокирующая (блокирует все другие события в этот день)',
             'recurring' => 'Повторяющаяся',

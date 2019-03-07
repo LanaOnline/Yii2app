@@ -1,7 +1,9 @@
 <?php
 
 $params = require __DIR__ . '/params.php';
-$db = require __DIR__ . '/db.php';
+$db = file_exists( __DIR__.'/db_local.php')
+        ?(require __DIR__ . '/db_local.php')
+        :(require __DIR__ . '/db.php');
 
 $config = [
     'id' => 'basic',
@@ -18,6 +20,7 @@ $config = [
         ],
     ],
     'components' => [
+        'rbac'=>\app\components\RbacComponent::class,
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
             'cookieValidationKey' => 'VfZ0NVsq9UktPY5naIu71XxmzRndCbvo',
@@ -26,11 +29,16 @@ $config = [
             'class' => \app\components\ActivityComponent::class,
             'activity_class' => '\app\models\Activity'
         ],
+        'auth' => \app\components\UsersAuthComponent::class,
+        'authManager'=>[
+            'class'=>'\yii\rbac\DbManager'
+        ],
         'cache' => [
             'class' => 'yii\caching\FileCache',
         ],
+        'dao' => ['class' => \app\components\DaoComponent::class],
         'user' => [
-            'identityClass' => 'app\models\User',
+            'identityClass' => 'app\models\Users',
             'enableAutoLogin' => true,
         ],
         'errorHandler' => [

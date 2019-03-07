@@ -20,15 +20,17 @@ use yii\bootstrap\ActiveForm;
         ]); ?>
         <?=$form->field($activity, 'title'); ?>
         <?=$form->field($activity, 'description')->textarea(); ?>
-        <?=$form->field($activity, 'email'); ?>
-        <?=$form->field($activity, 'startDate'); ?>
+        <?=$form->field($activity, 'startDate')->input('date', ['value' => date('Y-m-d')]); ?>
+        <?=$form->field($activity, 'endDate')->input('date'); ?>
         <?=$form->field($activity, 'is_blocked')->checkbox(); ?>
         <?=$form->field($activity, 'recurring')->checkbox(); ?>
         <?=$form->field($activity, 'imageFiles[]')->fileInput(['multiple' => true, 'accept' => 'image/*']); ?>
 
         <div class="form-group">
-            <button type="submit" class="btn btn-default">Отправить</button>
+            <button type="submit" class="btn btn-primary">Отправить</button>
         </div>
         <?php $form=ActiveForm::end(); ?>
+        <hr/>
+        <?=\yii\helpers\Html::a('Вернуться в календарь', '/activity/calendar'); ?>
     </div>
 </div>
