@@ -36,7 +36,7 @@ class RbacComponent extends Component
         $createActivity = $authManager->createPermission('createActivity');
         $createActivity->description='Создание активности';
 
-        $viewOwnerRule=new ViewActivityOwnerRule();
+        $viewOwnerRule = new ViewActivityOwnerRule();
         $authManager->add($viewOwnerRule);
 
         $viewActivity = $authManager->createPermission('viewActivity');
@@ -59,6 +59,7 @@ class RbacComponent extends Component
         //roles can be assigned at user registration or later
         $authManager->assign($user,3);//assign user role to user with id = 3
         $authManager->assign($admin,4);//assign admin role to user with id = 4
+        $authManager->assign($admin,10);//assign admin role to user with id = 10
     }
     /**
      * @return bool

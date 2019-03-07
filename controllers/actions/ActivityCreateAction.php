@@ -10,6 +10,7 @@ namespace app\controllers\actions;
 
 
 use app\components\ActivityComponent;
+use app\models\Users;
 use yii\base\Action;
 use yii\web\HttpException;
 use yii\web\UploadedFile;
@@ -30,8 +31,10 @@ class ActivityCreateAction extends Action
 
         if (\Yii::$app->request->isPost) {
             $activity = $comp->getModel(\Yii::$app->request->post());
+
             //get active user id from session
-            $activity->user_id = \Yii::$app->session->get('__id');
+//            $activity->user_id = \Yii::$app->session->get('__id');
+            $activity->user_id = $activity->user->id;
             //get images
             $activity->imageFiles = UploadedFile::getInstances($activity, 'imageFiles');
 

@@ -14,6 +14,7 @@ use yii\helpers\Html;
         <h1>Просмотр активности</h1>
 
         <ul class="list-group">
+            <li><label>ID</label>: <?= Html::encode($activity->id) ?></li>
             <li><label>Название</label>: <?= Html::encode($activity->title) ?></li>
             <li><label>Описание</label>: <?= Html::encode($activity->description) ?></li>
             <li><label>Дата начала</label>: <?= Html::encode($activity->startDate) ?></li>

@@ -38,8 +38,7 @@ class Activity extends ActivityBase
     public function rules()
     {
         return array_merge([
- //           ['endDate', ['required' => false]], todo: figure out how to override parent 'required' rule
-            [['title'],'string', 'min' => 2],
+            [['title'],'string', 'min' => 2, 'max' => 255],
             [['title'], 'trim'],
             [['startDate', 'endDate'], 'default', 'value' => date('Y-m-d')],
             ['startDate', 'compare', 'compareValue' => date('Y-m-d'), 'operator' => '>=', 'message' => 'Дата начала не может предшестовать сегодняшнему дню'],

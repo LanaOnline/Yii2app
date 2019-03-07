@@ -3,6 +3,7 @@
 namespace app\models;
 
 use Yii;
+use yii\db\ActiveRecord;
 
 /**
  * This is the model class for table "activity".
@@ -20,7 +21,7 @@ use Yii;
  *
  * @property Users $user
  */
-class ActivityBase extends \yii\db\ActiveRecord
+class ActivityBase extends ActiveRecord
 {
     /**
      * {@inheritdoc}

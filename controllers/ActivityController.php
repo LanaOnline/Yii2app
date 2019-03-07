@@ -29,7 +29,6 @@ class ActivityController extends BaseController
         return [
             'create'=>['class'=>ActivityCreateAction::class],
             'index'=>['class'=>ActivityIndexAction::class],
-//            'view-activity'=>['class'=>ActivityViewAction::class],
             'edit'=>['class'=>ActivityEditAction::class],
             'calendar'=>['class'=>ActivityCalendarAction::class]
         ];

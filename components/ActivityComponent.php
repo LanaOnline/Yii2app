@@ -45,6 +45,7 @@ class ActivityComponent extends Component
         {
             $model->load($params);
         }
+        //trigger event
         $model->trigger($model::EVENT_MY_EVENT);
         return $model;
     }
