@@ -14,6 +14,7 @@ $config = [
         '@bower' => '@vendor/bower-asset',
         '@npm'   => '@vendor/npm-asset',
     ],
+    'as lgo'=>\app\behaviors\LogMyBehavior::class,
     'modules' => [
         'admin' => [
             'class' => 'app\modules\admin\Module',
@@ -26,6 +27,7 @@ $config = [
         ],
         'rbac'=>\app\components\RbacComponent::class,
         'request' => [
+            'as logme'=>\app\behaviors\LogMyBehavior::class,
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
             'cookieValidationKey' => 'VfZ0NVsq9UktPY5naIu71XxmzRndCbvo',
         ],

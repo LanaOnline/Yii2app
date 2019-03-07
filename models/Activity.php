@@ -8,12 +8,15 @@
 
 namespace app\models;
 
+use app\behaviors\GetDateFunctionFormatBehavior;
+use app\behaviors\LogMyBehavior;
 use yii\web\UploadedFile;
 
 /**
  * Class Activity
  *
  * Describes a calendar event entity
+ * @mixin GetDateFunctionFormatBehavior
  */
 class Activity extends ActivityBase
 {
@@ -21,6 +24,7 @@ class Activity extends ActivityBase
      * @var UploadedFile[]
      */
     public $imageFiles;
+    const EVENT_MY_EVENT = 'my_event';
 
     public function beforeValidate()
     {
@@ -55,6 +59,18 @@ class Activity extends ActivityBase
             'is_blocked' => 'Блокирующая (блокирует все другие события в этот день)',
             'recurring' => 'Повторяющаяся',
             'imageFiles' => 'Загрузить изображения'
+        ];
+    }
+
+    public function behaviors()
+    {
+        return [
+            //array of behaviors
+            [
+                'class'=>GetDateFunctionFormatBehavior::class,
+                'attribute_name' => 'date_created'
+            ],
+            LogMyBehavior::class
         ];
     }
 }
