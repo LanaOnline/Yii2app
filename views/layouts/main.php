@@ -38,16 +38,15 @@ AppAsset::register($this);
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-right'],
         'items' => [
-            ['label' => 'Home', 'url' => ['/site/index']],
-            ['label' => 'About', 'url' => ['/site/about']],
-            ['label' => 'Contact', 'url' => ['/site/contact']],
+            ['label' => 'Календарь', 'url' => ['/activity/calendar']],
+            ['label' => 'Data Provider', 'url' => ['/activity/index']],
             Yii::$app->user->isGuest ? (
-                ['label' => 'Login', 'url' => ['/site/login']]
+                ['label' => 'Войти', 'url' => ['/auth/sign-in']]
             ) : (
                 '<li>'
                 . Html::beginForm(['/site/logout'], 'post')
                 . Html::submitButton(
-                    'Logout (' . Yii::$app->user->identity->username . ')',
+                    'Выйти (' . Yii::$app->user->identity->username . ')',//todo: assign username
                     ['class' => 'btn btn-link logout']
                 )
                 . Html::endForm()
@@ -69,7 +68,7 @@ AppAsset::register($this);
 
 <footer class="footer">
     <div class="container">
-        <p class="pull-left">&copy; My Company <?= date('Y') ?></p>
+        <p class="pull-left">&copy; LanaOnline <?= date('Y') ?></p>
         <p class="pull-left" style="margin-left:10px;">Последняя посещенная страница - <?= \Yii::$app->session->get('lastPage'); ?></p>
 
         <p class="pull-right"><?= Yii::powered() ?></p>

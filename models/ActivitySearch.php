@@ -23,7 +23,7 @@ class ActivitySearch extends Activity
             [
                 'query' => $query,
                 'pagination' => [
-                    'pageSize'=>3
+                    'pageSize'=>10
                 ],
                 'sort' => [
                     'defaultOrder'=>

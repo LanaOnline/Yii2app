@@ -7,6 +7,7 @@
  */
 use yii\helpers\Html;
 
+/** @var app\models\Activity $activity*/
 ?>
 
 <div class="row">
@@ -14,16 +15,14 @@ use yii\helpers\Html;
         <h1>Просмотр активности</h1>
 
         <ul class="list-group">
-            <li><label>ID</label>: <?= Html::encode($activity->id) ?></li>
             <li><label>Название</label>: <?= Html::encode($activity->title) ?></li>
             <li><label>Описание</label>: <?= Html::encode($activity->description) ?></li>
             <li><label>Дата начала</label>: <?= Html::encode($activity->startDate) ?></li>
             <li><label>Дата окончания</label>: <?= Html::encode($activity->endDate) ?></li>
             <li><label>Блокирующая</label>: <?= Html::encode($activity->is_blocked?'Да':'Нет') ?></li>
             <li><label>Повторяющаяся</label>: <?= Html::encode($activity->recurring?'Да':'Нет') ?></li>
-            <li>Изображения:</li>
         </ul>
-        <?= Html::a('Редактировать', ['/activity/edit'], ['class' => 'btn btn-default']); ?>
+        <?= Html::a('Редактировать', ['/activity/edit', 'id' => $activity->id], ['class' => 'btn btn-default']); ?>
         <?= Html::a('Вернуться в календарь', ['/activity/calendar'], ['class' => 'btn btn-default']); ?>
     </div>
 </div>

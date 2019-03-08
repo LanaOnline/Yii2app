@@ -66,7 +66,7 @@ class Users extends UsersBase implements IdentityInterface
     public static function findIdentityByAccessToken($token, $type = null)
     {
         //use for RestAPI
-        // TODO: Implement findIdentityByAccessToken() method.
+        return null;
     }
 
     /**

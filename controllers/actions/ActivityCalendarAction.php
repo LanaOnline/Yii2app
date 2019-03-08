@@ -14,6 +14,8 @@ use yii\base\Action;
 class ActivityCalendarAction extends Action
 {
     public function run(){
+
+
         //add data source to pass as parameters
         return $this->controller->render('calendar');
 
