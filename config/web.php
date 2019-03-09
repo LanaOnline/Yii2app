@@ -42,11 +42,14 @@ $config = [
         'cache' => [
             'class' => 'yii\caching\FileCache',
         ],
-        'dao' => ['class' => \app\components\DaoComponent::class],
+        'dao' => [
+            'class' => \app\components\DaoComponent::class
+        ],
         'user' => [
             'identityClass' => 'app\models\Users',
             'enableAutoLogin' => true,
         ],
+        'users' => \app\components\UsersComponent::class,
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],

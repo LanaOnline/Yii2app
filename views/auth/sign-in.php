@@ -21,7 +21,8 @@ use yii\bootstrap\ActiveForm;
         ]) ?>
 
         <?=$form->field($model, 'email') ?>
-        <?=$form->field($model, 'password')->passwordInput(); ?>
+        <?=$form->field($model, 'password')->passwordInput() ?>
+        <?=$form->field($model, 'rememberMe')->checkbox(); ?>
 
         <div class="form-group">
             <button type="submit" class="btn btn-default">Войти</button>

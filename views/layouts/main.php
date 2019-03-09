@@ -9,8 +9,11 @@ use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use app\assets\AppAsset;
+use app\models\Users;
 
+$username = Users::findIdentity(Yii::$app->user->id)['email'];
 AppAsset::register($this);
+
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
@@ -40,13 +43,14 @@ AppAsset::register($this);
         'items' => [
             ['label' => 'Календарь', 'url' => ['/activity/calendar']],
             ['label' => 'Data Provider', 'url' => ['/activity/index']],
+            ['label' => 'Панель админа', 'url' => ['/admin'], 'visible' => $username == 'admin@email.com'],
             Yii::$app->user->isGuest ? (
                 ['label' => 'Войти', 'url' => ['/auth/sign-in']]
             ) : (
                 '<li>'
                 . Html::beginForm(['/site/logout'], 'post')
                 . Html::submitButton(
-                    'Выйти (' . Yii::$app->user->identity->username . ')',//todo: assign username
+                    'Выйти (' . $username . ')',
                     ['class' => 'btn btn-link logout']
                 )
                 . Html::endForm()

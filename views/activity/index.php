@@ -7,6 +7,7 @@
  */
 
 use app\behaviors\GetDateFunctionFormatBehavior;
+use yii\debug\models\timeline\DataProvider;
 
 ?>
 
