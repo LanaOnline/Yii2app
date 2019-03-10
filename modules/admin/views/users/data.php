@@ -9,13 +9,18 @@
 use yii\grid\GridView;
 use yii\helpers\Html;
 
-/** @var \app\models\UsersCrud $dataProvider */
+/* @var $this yii\web\View */
+/* @var $searchModel app\models\UsersCrud */
+/* @var $dataProvider yii\data\ActiveDataProvider */
+
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Панель администирования'), 'url' => ['/admin']];
+$this->params['breadcrumbs'][] = 'Пользователи';
 ?>
 <div class="row">
     <div class="col-md-12">
         <h1>Список зарегистрированных пользователей</h1>
         <p>
-            <?= Html::a(Yii::t('app', 'Создать нового пользователя'), ['/admin/default/create'], ['class' => 'btn btn-success']) ?>
+            <?= Html::a(Yii::t('app', 'Создать нового пользователя'), ['/admin/users/create'], ['class' => 'btn btn-success']) ?>
         </p>
         <?= GridView::widget([
             'dataProvider' => $dataProvider,

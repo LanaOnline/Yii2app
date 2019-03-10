@@ -51,10 +51,10 @@ class Activity extends ActivityBase
     public function attributeLabels()
     {
         return [
-            'title' => 'Наименование активности',
+            'title' => 'Наименование',
             'startDate' => 'Дата начала',
             'endDate' => 'Дата окончания',
-            'description' => 'Описание активности',
+            'description' => 'Описание',
             'is_blocked' => 'Блокирующая (блокирует все другие события в этот день)',
             'recurring' => 'Повторяющаяся',
             'imageFiles' => 'Загрузить изображения'
