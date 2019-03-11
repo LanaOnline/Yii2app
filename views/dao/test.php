@@ -7,6 +7,8 @@
  * Time: 2:06 PM
  */
 
+use app\widgets\ViewUsersListWidget\ViewUsersListWidget;
+
 /* @var $this \yii\web\View */
 /* @var $users array */
 /* @var $userActivities array */
@@ -17,11 +19,7 @@
 
 ?>
 <div class="row">
-    <div  class="col-md-6">
-        <pre>
-            <?php print_r($users);?>
-        </pre>
-    </div>
+    <?= ViewUsersListWidget::widget(['users' => $users]) ?>
     <div  class="col-md-6">
         <pre>
             <?php print_r($userActivities);?>

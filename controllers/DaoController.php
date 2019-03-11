@@ -10,9 +10,19 @@ namespace app\controllers;
 
 use app\base\BaseController;
 use app\components\DaoComponent;
+use yii\filters\PageCache;
 
 class DaoController extends BaseController
 {
+//    public function behaviors()
+//    {
+//        return [
+//            ['class'=>PageCache::class,
+//                'only' => ['test'],
+//                'duration' => 10]
+//        ];
+//    }
+
     public function actionTest() {
         /**
          * @var DaoComponent $dao
@@ -35,5 +45,18 @@ class DaoController extends BaseController
             'countRecurring' => $countRecurring,
             'allUserActivities' => $allUserActivities,
             'activityReader' => $activityReader]);
+    }
+
+    public function actionCache(){
+//        \Yii::$app->cache->set('key1','value1'); //set different key for different users
+//         $value = \Yii::$app->cache->get('key1'); //get
+//        \Yii::$app->cache->delete('key1'); //delete
+//        \Yii::$app->cache->flush();//clears all cache
+        //clear cache from console: 'php yii cache/flush-all'
+
+        $value=\Yii::$app->cache->getOrSet('key1',function (){
+            return 'value3';
+        });
+        echo $value;
     }
 }

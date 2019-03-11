@@ -2,6 +2,7 @@
 
 namespace app\models;
 
+use yii\data\ActiveDataProvider;
 use yii\web\IdentityInterface;
 
 /**
@@ -21,24 +22,27 @@ class Users extends UsersBase implements IdentityInterface
 {
     public $password;
     public $password_match;
+    public $rememberMe = true;
     public $username;
 
     public function rules()
     {
         //$this->updateAttributes(['email']);
         return array_merge([
-            ['password','string','min' => 4],//add autonomous rule for password check with RegEx
+            ['password','string','min' => 4],//todo: add autonomous rule for password check with RegEx
             ['password_match','compare', 'compareAttribute' => 'password', 'message' => 'Пароли не совпадают'],
-            ['email', 'unique', 'message' => 'Такой email уже зарегистрирован']
+            ['email', 'unique', 'message' => 'Такой email уже зарегистрирован'],
+            ['rememberMe', 'boolean']
         ], parent::rules());
     }
 
     public function attributeLabels()
     {
         return [
-            'email' => 'Ваш email',
+            'email' => 'Email',
             'password' => 'Введите пароль',
             'password_match' => 'Подтвердите пароль',
+            'rememberMe' => 'Запомнить меня'
         ];
     }
 
@@ -65,8 +69,8 @@ class Users extends UsersBase implements IdentityInterface
      */
     public static function findIdentityByAccessToken($token, $type = null)
     {
-        //use for REST API
-        // TODO: Implement findIdentityByAccessToken() method.
+        //use for RestAPI
+        return null;
     }
 
     /**

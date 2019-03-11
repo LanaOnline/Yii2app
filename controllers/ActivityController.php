@@ -12,8 +12,9 @@ use app\base\BaseController;
 use app\components\ActivityComponent;
 use app\controllers\actions\ActivityCalendarAction;
 use app\controllers\actions\ActivityCreateAction;
+use app\controllers\actions\ActivityDeleteAction;
 use app\controllers\actions\ActivityEditAction;
-use app\controllers\actions\ActivityViewAction;
+use app\controllers\actions\ActivityIndexAction;
 use yii\web\HttpException;
 
 class ActivityController extends BaseController
@@ -27,8 +28,9 @@ class ActivityController extends BaseController
     {
         return [
             'create'=>['class'=>ActivityCreateAction::class],
-//            'view-activity'=>['class'=>ActivityViewAction::class],
+            'index'=>['class'=>ActivityIndexAction::class],
             'edit'=>['class'=>ActivityEditAction::class],
+            'delete'=>['class'=>ActivityDeleteAction::class],
             'calendar'=>['class'=>ActivityCalendarAction::class]
         ];
     }
@@ -39,9 +41,7 @@ class ActivityController extends BaseController
      * @throws HttpException
      */
     public function actionView($id) {
-        /**
-         * @var ActivityComponent $comp
-         */
+        /** @var ActivityComponent $comp */
         $comp = \Yii::$app->activity;
 
         $activity = $comp->getActivity($id);

@@ -5,32 +5,19 @@
  * Date: 2/20/2019
  * Time: 9:13 PM
  */
-use yii\bootstrap\ActiveForm;
- ?>
-<div class="row">
-    <div class="col-md-6">
-        <h2>Создание новой активности</h2>
-        <?php $form=ActiveForm::begin([
-            'action' => '',
-            'method' => 'POST',
-            'id' => 'activity',
-            'options' => [
-                'enctype' => 'multipart/form-data'
-            ]
-        ]); ?>
-        <?=$form->field($activity, 'title'); ?>
-        <?=$form->field($activity, 'description')->textarea(); ?>
-        <?=$form->field($activity, 'startDate')->input('date', ['value' => date('Y-m-d')]); ?>
-        <?=$form->field($activity, 'endDate')->input('date'); ?>
-        <?=$form->field($activity, 'is_blocked')->checkbox(); ?>
-        <?=$form->field($activity, 'recurring')->checkbox(); ?>
-        <?=$form->field($activity, 'imageFiles[]')->fileInput(['multiple' => true, 'accept' => 'image/*']); ?>
 
-        <div class="form-group">
-            <button type="submit" class="btn btn-primary">Отправить</button>
-        </div>
-        <?php $form=ActiveForm::end(); ?>
-        <hr/>
-        <?=\yii\helpers\Html::a('Вернуться в календарь', '/activity/calendar'); ?>
+/** @var app\models\Activity $activity */
+$this->title = Yii::t('app', 'Создание активности');
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Все активности'), 'url' => ['/activity']];
+$this->params['breadcrumbs'][] = Yii::t('app', 'Создание активности');
+?>
+<div class="row create-activity">
+    <div class="col-md-12">
+        <h2>Создать новую активность</h2>
     </div>
-</div>
+        <?= $this->render('_form', ['activity' => $activity]) ?>
+    <div class="col-md-12">
+        <hr/>
+        <?=\yii\helpers\Html::a('Вернуться в календарь', '/activity/calendar', ['class' => 'btn btn-default']); ?>
+    </div>
+</div><!-- create-activity -->

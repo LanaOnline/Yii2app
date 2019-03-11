@@ -43,7 +43,7 @@ class UsersAuthComponent extends Component
         }
         $user->username = $user->email;//username is required by Yii
 
-        return \Yii::$app->user->login($user);
+        return \Yii::$app->user->login($user, $model->rememberMe ? 3600*24*30 : 0);
     }
 
     public function validatePassword($pass, $hash) {//add this func to rules in auth scenario
@@ -63,9 +63,6 @@ class UsersAuthComponent extends Component
         }
         $model->password_hash = $this->hashPassword($model->password);
 
-//        if(!$model->validate()) {
-//            return false;
-//        }
         if ($model->save()) {//calls validation before saving to db
             return true;
         }

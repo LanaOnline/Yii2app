@@ -1,12 +1,16 @@
-<div class="admin-default-index">
-    <h1><?= $this->context->action->uniqueId ?></h1>
-    <p>
-        This is the view content for action "<?= $this->context->action->id ?>".
-        The action belongs to the controller "<?= get_class($this->context) ?>"
-        in the "<?= $this->context->module->id ?>" module.
-    </p>
-    <p>
-        You may customize this page by editing the following file:<br>
-        <code><?= __FILE__ ?></code>
-    </p>
+<?php
+
+?>
+<div class="row admin-default-index">
+    <div class="col-md-6 col-md-offset-3 text-center">
+        <h1 style="margin-bottom: 2em;">Панель администрирования</h1>
+
+        <h3>
+            <?=\yii\bootstrap\Html::a('Управление пользователями', '/admin/users/data')?>
+        </h3>
+        <hr/>
+        <h3>
+            <?=\yii\bootstrap\Html::a('Просмотр всех активностей', '/admin/activities/data')?>
+        </h3>
+    </div>
 </div>

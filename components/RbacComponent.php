@@ -36,7 +36,7 @@ class RbacComponent extends Component
         $createActivity = $authManager->createPermission('createActivity');
         $createActivity->description='Создание активности';
 
-        $viewOwnerRule=new ViewActivityOwnerRule();
+        $viewOwnerRule = new ViewActivityOwnerRule();
         $authManager->add($viewOwnerRule);
 
         $viewActivity = $authManager->createPermission('viewActivity');

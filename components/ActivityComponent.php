@@ -10,6 +10,7 @@ namespace app\components;
 
 
 use app\models\Activity;
+use app\models\ActivitySearch;
 use yii\base\Component;
 
 class ActivityComponent extends Component
@@ -31,6 +32,7 @@ class ActivityComponent extends Component
     }
 
     /**
+     * @param
      * @return Activity
      */
     public function getModel($params = null)
@@ -42,9 +44,10 @@ class ActivityComponent extends Component
 
         if ($params && is_array($params))
         {
-
             $model->load($params);
         }
+        //trigger event
+//        $model->trigger($model::EVENT_MY_EVENT);
         return $model;
     }
 
@@ -64,11 +67,11 @@ class ActivityComponent extends Component
     {
         if ($model->validate())
         {
-            $path = $this->getPathSaveFile();
-
-            foreach ($model->imageFiles as $file) {
-                $file->saveAs($path . $file->baseName . '.' . $file->extension);
-            }
+//            $path = $this->getPathSaveFile();
+//
+//            foreach ($model->imageFiles as $file) {
+//                $file->saveAs($path . $file->baseName . '.' . $file->extension);
+//            }
 
             return true;
         } else {
@@ -79,5 +82,23 @@ class ActivityComponent extends Component
 
     public function getPathSaveFile() {
         return \Yii::getAlias('@app/web/images/');
+    }
+
+    /**
+     * @param $params
+     * @return \yii\data\ActiveDataProvider
+     */
+    public function getSearchProvider($params){
+        $model = new ActivitySearch();
+        return $model->getDataProvider();
+    }
+
+    /**
+     * Get notification list for today
+     * @return Activity[]
+     */
+    public function getActivityToday(){
+        return Activity::find()->andWhere('startDate>=:date',[':date' => date('Y-m-d')])
+            ->andWhere(['use_notification'=>1])->all();//todo: add notification flag
     }
 }

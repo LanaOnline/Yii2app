@@ -9,8 +9,11 @@ use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use app\assets\AppAsset;
+use app\models\Users;
 
+$username = Users::findIdentity(Yii::$app->user->id)['email'];
 AppAsset::register($this);
+
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
@@ -38,16 +41,16 @@ AppAsset::register($this);
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-right'],
         'items' => [
-            ['label' => 'Home', 'url' => ['/site/index']],
-            ['label' => 'About', 'url' => ['/site/about']],
-            ['label' => 'Contact', 'url' => ['/site/contact']],
+            ['label' => 'Календарь', 'url' => ['/activity/calendar'], 'visible' => !Yii::$app->user->isGuest],
+            ['label' => 'Data Provider', 'url' => ['/activity/index'], 'visible' => !Yii::$app->user->isGuest],
+            ['label' => 'Панель админа', 'url' => ['/admin'], 'visible' => $username == 'admin@email.com'],
             Yii::$app->user->isGuest ? (
-                ['label' => 'Login', 'url' => ['/site/login']]
+                ['label' => 'Войти', 'url' => ['/auth/sign-in']]
             ) : (
                 '<li>'
                 . Html::beginForm(['/site/logout'], 'post')
                 . Html::submitButton(
-                    'Logout (' . Yii::$app->user->identity->username . ')',
+                    'Выйти (' . $username . ')',
                     ['class' => 'btn btn-link logout']
                 )
                 . Html::endForm()
@@ -69,8 +72,8 @@ AppAsset::register($this);
 
 <footer class="footer">
     <div class="container">
-        <p class="pull-left">&copy; My Company <?= date('Y') ?></p>
-        <p class="pull-left" style="margin-left:10px;">Последняя посещенная страница - <?= \Yii::$app->session->get('lastPage'); ?></p>
+        <p class="pull-left">LanaOnline &copy; <?= date('Y') ?></p>
+        <p class="pull-left hidden-xs" style="margin-left:10px;">Последняя посещенная страница - <?= \Yii::$app->session->get('lastPage'); ?></p>
 
         <p class="pull-right"><?= Yii::powered() ?></p>
     </div>

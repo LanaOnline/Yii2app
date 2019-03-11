@@ -14,14 +14,20 @@ $config = [
         '@bower' => '@vendor/bower-asset',
         '@npm'   => '@vendor/npm-asset',
     ],
+    'as lgo'=>\app\behaviors\LogMyBehavior::class,
     'modules' => [
         'admin' => [
             'class' => 'app\modules\admin\Module',
         ],
     ],
     'components' => [
+        'formatter'=>[
+            'class'=>'\yii\i18n\Formatter',
+            'dateFormat' => 'php:d.m.Y'
+        ],
         'rbac'=>\app\components\RbacComponent::class,
         'request' => [
+            'as logme'=>\app\behaviors\LogMyBehavior::class,
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
             'cookieValidationKey' => 'VfZ0NVsq9UktPY5naIu71XxmzRndCbvo',
         ],
@@ -35,8 +41,14 @@ $config = [
         ],
         'cache' => [
             'class' => 'yii\caching\FileCache',
+            ],
+//        'cache' => [
+//            'class' => 'yii\caching\MemCache',
+//            'useMemcached' => true
+//        ],
+        'dao' => [
+            'class' => \app\components\DaoComponent::class
         ],
-        'dao' => ['class' => \app\components\DaoComponent::class],
         'user' => [
             'identityClass' => 'app\models\Users',
             'enableAutoLogin' => true,
@@ -69,6 +81,12 @@ $config = [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
+//                'shortUrl' => 'actualUrl' // change url
+//                'shortUrl<action>' => 'actualUrl<action>' // change url with actions
+//                'shortUrl/edit/<id:\d+>' => 'actualUrl/edit' // change url with parameters from 'edit?id=1' to 'edit/1'
+//                'moduleName' => 'longModuleIndexUrl' // change Module url
+//                '<module>/<controller>/<action>' => '<module>/<controller>/<action>' // change Module url
+
             ],
         ],
 
