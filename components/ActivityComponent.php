@@ -91,4 +91,13 @@ class ActivityComponent extends Component
         $model = new ActivitySearch();
         return $model->getDataProvider();
     }
+
+    /**
+     * Get notification list for today
+     * @return Activity[]
+     */
+    public function getActivityToday(){
+        return Activity::find()->andWhere('startDate>=:date',[':date' => date('Y-m-d')])
+            ->andWhere(['use_notification'=>1])->all();//todo: add notification flag
+    }
 }
