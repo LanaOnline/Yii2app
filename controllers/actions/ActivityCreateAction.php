@@ -32,7 +32,7 @@ class ActivityCreateAction extends Action
         if (\Yii::$app->request->isPost) {
             $activity = $comp->getModel(\Yii::$app->request->post());
 
-            $activity->user_id = $activity->user->id;
+            $activity->user_id = \Yii::$app->user->identity->getId();
 
             //get images
 //            $activity->imageFiles = UploadedFile::getInstances($activity, 'imageFiles');

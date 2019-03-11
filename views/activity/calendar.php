@@ -7,6 +7,8 @@
  */
 use yii\helpers\Html;
 //add calendar view, pull data from db
+$this->title = Yii::t('app', 'Календарь');
+$this->params['breadcrumbs'][] = Yii::t('app', 'Календарь');
 ?>
 
 

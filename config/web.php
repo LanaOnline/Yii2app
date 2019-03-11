@@ -39,6 +39,9 @@ $config = [
         'authManager'=>[
             'class'=>'\yii\rbac\DbManager'
         ],
+        'cache' => [
+            'class' => 'yii\caching\FileCache',
+            ],
 //        'cache' => [
 //            'class' => 'yii\caching\MemCache',
 //            'useMemcached' => true
@@ -78,6 +81,12 @@ $config = [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
+//                'shortUrl' => 'actualUrl' // change url
+//                'shortUrl<action>' => 'actualUrl<action>' // change url with actions
+//                'shortUrl/edit/<id:\d+>' => 'actualUrl/edit' // change url with parameters from 'edit?id=1' to 'edit/1'
+//                'moduleName' => 'longModuleIndexUrl' // change Module url
+//                '<module>/<controller>/<action>' => '<module>/<controller>/<action>' // change Module url
+
             ],
         ],
 

@@ -41,8 +41,8 @@ AppAsset::register($this);
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-right'],
         'items' => [
-            ['label' => 'Календарь', 'url' => ['/activity/calendar']],
-            ['label' => 'Data Provider', 'url' => ['/activity/index']],
+            ['label' => 'Календарь', 'url' => ['/activity/calendar'], 'visible' => !Yii::$app->user->isGuest],
+            ['label' => 'Data Provider', 'url' => ['/activity/index'], 'visible' => !Yii::$app->user->isGuest],
             ['label' => 'Панель админа', 'url' => ['/admin'], 'visible' => $username == 'admin@email.com'],
             Yii::$app->user->isGuest ? (
                 ['label' => 'Войти', 'url' => ['/auth/sign-in']]
@@ -72,8 +72,8 @@ AppAsset::register($this);
 
 <footer class="footer">
     <div class="container">
-        <p class="pull-left">&copy; LanaOnline <?= date('Y') ?></p>
-        <p class="pull-left" style="margin-left:10px;">Последняя посещенная страница - <?= \Yii::$app->session->get('lastPage'); ?></p>
+        <p class="pull-left">LanaOnline &copy; <?= date('Y') ?></p>
+        <p class="pull-left hidden-xs" style="margin-left:10px;">Последняя посещенная страница - <?= \Yii::$app->session->get('lastPage'); ?></p>
 
         <p class="pull-right"><?= Yii::powered() ?></p>
     </div>

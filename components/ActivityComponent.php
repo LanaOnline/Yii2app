@@ -32,6 +32,7 @@ class ActivityComponent extends Component
     }
 
     /**
+     * @param
      * @return Activity
      */
     public function getModel($params = null)
@@ -46,7 +47,7 @@ class ActivityComponent extends Component
             $model->load($params);
         }
         //trigger event
-        $model->trigger($model::EVENT_MY_EVENT);
+//        $model->trigger($model::EVENT_MY_EVENT);
         return $model;
     }
 
@@ -66,11 +67,11 @@ class ActivityComponent extends Component
     {
         if ($model->validate())
         {
-            $path = $this->getPathSaveFile();
-
-            foreach ($model->imageFiles as $file) {
-                $file->saveAs($path . $file->baseName . '.' . $file->extension);
-            }
+//            $path = $this->getPathSaveFile();
+//
+//            foreach ($model->imageFiles as $file) {
+//                $file->saveAs($path . $file->baseName . '.' . $file->extension);
+//            }
 
             return true;
         } else {

@@ -8,7 +8,8 @@
 
 use app\behaviors\GetDateFunctionFormatBehavior;
 use yii\debug\models\timeline\DataProvider;
-
+$this->title = Yii::t('app', 'Все активности');
+$this->params['breadcrumbs'][] = Yii::t('app', 'Все активности');
 ?>
 
 <div class="row">

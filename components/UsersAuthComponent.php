@@ -63,9 +63,6 @@ class UsersAuthComponent extends Component
         }
         $model->password_hash = $this->hashPassword($model->password);
 
-//        if(!$model->validate()) {
-//            return false;
-//        }
         if ($model->save()) {//calls validation before saving to db
             return true;
         }

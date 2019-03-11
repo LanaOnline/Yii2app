@@ -11,7 +11,7 @@ use yii\bootstrap\ActiveForm;
 /* @var $model \app\models\Users */
 ?>
 
-<div class="col-md-6">
+<div class="create-user-form">
     <?php $form = ActiveForm::begin([
         'method' => 'POST'
     ]) ?>

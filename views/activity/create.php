@@ -7,6 +7,9 @@
  */
 
 /** @var app\models\Activity $activity */
+$this->title = Yii::t('app', 'Создание активности');
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Все активности'), 'url' => ['/activity']];
+$this->params['breadcrumbs'][] = Yii::t('app', 'Создание активности');
 ?>
 <div class="row create-activity">
     <div class="col-md-12">

@@ -8,21 +8,27 @@
 use yii\helpers\Html;
 
 /** @var app\models\Activity $activity*/
+$this->title = 'Просмотр активности: ' . $activity->title;
+$this->params['breadcrumbs'][] = [
+    'label' => Yii::t('app', 'Все активности'),
+    'url' => ['/activity']
+];
+$this->params['breadcrumbs'][] = Yii::t('app', 'Просмотр активности');
 ?>
 
 <div class="row">
     <div class="col-md-6">
         <h1>Просмотр активности</h1>
+        <?= Html::a('Редактировать', ['/activity/edit', 'id' => $activity->id], ['class' => 'btn btn-primary']); ?>
+        <?= Html::a('Календарь', ['/activity/calendar'], ['class' => 'btn btn-default']); ?>
 
-        <ul class="list-group">
-            <li><label>Название</label>: <?= Html::encode($activity->title) ?></li>
-            <li><label>Описание</label>: <?= Html::encode($activity->description) ?></li>
-            <li><label>Дата начала</label>: <?= Html::encode($activity->startDate) ?></li>
-            <li><label>Дата окончания</label>: <?= Html::encode($activity->endDate) ?></li>
-            <li><label>Блокирующая</label>: <?= Html::encode($activity->is_blocked?'Да':'Нет') ?></li>
-            <li><label>Повторяющаяся</label>: <?= Html::encode($activity->recurring?'Да':'Нет') ?></li>
+        <ul class="list-group" style="margin-top: 1em;">
+            <li class="list-group-item"><b>Название: </b><?= Html::encode($activity->title) ?></li>
+            <li class="list-group-item"><b>Описание: </b><?= Html::encode($activity->description) ?></li>
+            <li class="list-group-item"><b>Дата начала: </b><?= Html::encode($activity->startDate) ?></li>
+            <li class="list-group-item"><b>Дата окончания: </b><?= Html::encode($activity->endDate) ?></li>
+            <li class="list-group-item"><b>Блокирующая: </b><?= Html::encode($activity->is_blocked?'Да':'Нет') ?></li>
+            <li class="list-group-item"><b>Повторяющаяся: </b><?= Html::encode($activity->recurring?'Да':'Нет') ?></li>
         </ul>
-        <?= Html::a('Редактировать', ['/activity/edit', 'id' => $activity->id], ['class' => 'btn btn-default']); ?>
-        <?= Html::a('Вернуться в календарь', ['/activity/calendar'], ['class' => 'btn btn-default']); ?>
     </div>
 </div>

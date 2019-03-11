@@ -10,6 +10,15 @@ use \yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $activity app\models\Activity */
 $this->title = 'Редактировать активность: ' . $activity->title;
+$this->params['breadcrumbs'][] = [
+    'label' => Yii::t('app', 'Все активности'),
+    'url' => ['/activity']
+];
+$this->params['breadcrumbs'][] = [
+    'label' => Yii::t('app', 'Просмотр активности'),
+    'url' => ['/activity/view', 'id' => $activity->id]
+];
+$this->params['breadcrumbs'][] = Yii::t('app', 'Редактирование активности');
 ?>
 
 <div class="row edit-activity">
