@@ -39,9 +39,10 @@ $config = [
         'authManager'=>[
             'class'=>'\yii\rbac\DbManager'
         ],
-        'cache' => [
-            'class' => 'yii\caching\FileCache',
-        ],
+//        'cache' => [
+//            'class' => 'yii\caching\MemCache',
+//            'useMemcached' => true
+//        ],
         'dao' => [
             'class' => \app\components\DaoComponent::class
         ],
@@ -49,7 +50,6 @@ $config = [
             'identityClass' => 'app\models\Users',
             'enableAutoLogin' => true,
         ],
-        'users' => \app\components\UsersComponent::class,
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],

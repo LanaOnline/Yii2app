@@ -9,6 +9,8 @@
 namespace app\components;
 
 use yii\base\Component;
+use yii\caching\DbDependency;
+use yii\caching\TagDependency;
 use yii\db\Query;
 use yii\log\Logger;
 
@@ -33,12 +35,19 @@ class DaoComponent extends Component
 
     public function getFirstActivity() {
         $sql = 'SELECT *FROM activity LIMIT 3';
-        return $this->getDb()->createCommand($sql)->queryOne();
+
+//        TagDependency::invalidate(\Yii::$app->cache, 'tag_cache');//clear cache by tag name
+
+        return $this->getDb()->createCommand($sql)
+            ->cache(10, new DbDependency(['sql' => 'SELECT max(id) FROM activity']))//stores data 10 sec or until id count changes
+            ->queryOne();
     }
 
     public function countRecurringActivities() {
         $sql = 'SELECT count(id) FROM activity WHERE recurring = 1';
-        return $this->getDb()->createCommand($sql)->queryScalar();//returns first col, first row value
+        return $this->getDb()->createCommand($sql)
+            ->cache(null, new TagDependency(['tags' => 'tag_cache'])) //allows clearing cache by tags
+            ->queryScalar();//returns first col, first row value
     }
 
     public function getAllUserActivities($id_user) {
@@ -53,6 +62,7 @@ class DaoComponent extends Component
                 ->andWhere('a.date_created<=:date',[':date' => date('Y-m-d')])
                 ->orderBy(['a.id' => SORT_DESC])
                 ->limit(10)
+            ->cache(50)
                 ->createCommand()->rawSql;
     }
 
@@ -63,7 +73,6 @@ class DaoComponent extends Component
     public function getActivityReader() {
         $sql = 'SELECT * FROM users';
         return $this->getDb()->createCommand($sql)->query();
-
     }
 
     /**
